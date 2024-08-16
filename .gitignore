@@ -1,0 +1,9 @@
+.git
+.vscode
+src/__pycache__/
+src/utils/__pycache__/
+src/config/
+venv/
+
+credentials.json
+

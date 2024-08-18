@@ -13,21 +13,21 @@ class SQL_Handler:
         self.cursor = self.conn.cursor(dictionary=True)
 
 
-    def read_last_transaction_id(self):
-
-        query = """
-            SELECT transaction.ID
-            FROM transaction 
-            ORDER BY ID DESC 
-            LIMIT 1"""
-        
-        self.cursor.execute(query)
-        ultima_riga = self.cursor.fetchone()
-
-        if ultima_riga["ID"] is None:
-            return 0
-
-        return ultima_riga["ID"]
+    #def read_last_transaction_id(self):
+    #
+    #    query = """
+    #        SELECT transaction.ID
+    #        FROM transaction 
+    #        ORDER BY ID DESC 
+    #        LIMIT 1"""
+    #    
+    #    self.cursor.execute(query)
+    #    ultima_riga = self.cursor.fetchone()
+    #
+    #    if ultima_riga["ID"] is None:
+    #        return 0
+    #
+    #    return ultima_riga["ID"]
     
 
     def count_trasactions(self):
@@ -40,10 +40,21 @@ class SQL_Handler:
         return data["count"]
     
 
-    def get_all_ids(self):
-        query = """
+    #def get_all_ids(self):
+    #    query = """
+    #        SELECT transaction.ID
+    #        FROM transaction"""
+    #    
+    #    self.cursor.execute(query)
+    #    data = self.cursor.fetchall()
+    #    return data
+    
+    def get_last_n_ids(self, n):
+        query = f"""
             SELECT transaction.ID
-            FROM transaction"""
+            FROM transaction 
+            ORDER BY ID DESC 
+            LIMIT {n}"""
         
         self.cursor.execute(query)
         data = self.cursor.fetchall()

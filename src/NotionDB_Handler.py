@@ -17,10 +17,10 @@ class NotionDB_Handler:
                     },
                     'properties': {
                         'Trans-ID': {'title': [{'text': {'content': str(json['ID'])}}]},
-                        'Total': {'number': json['total']},
+                        'Total': {'number': json['total'] if json['total'] != None else 0},
                         'Date': {'date': {'start': json['date']}},
-                        'Receipt ID': {'rich_text': [{'text': {'content': json['receipt_id']}}],},
-                        'JPG File Name': {'rich_text': [{'text': {'content': json['receipt_file_name']}}],}
+                        'Receipt ID': {'rich_text': [{'text': {'content': str(json['receipt_id'])}}],},
+                        'JPG File Name': {'rich_text': [{'text': {'content': str(json['receipt_file_name'])}}],}
 
                     }
                 }
@@ -34,10 +34,10 @@ class NotionDB_Handler:
                     },
                     'properties': {
                         'Trans-ID': {'title': [{'text': {'content': str(json['ID'])}}]},
-                        'Name': {'rich_text': [{'text': {'content': json['name']}}],},
-                        'Address': {'rich_text': [{'text': {'content': json['address']}}],},
-                        'City': {'rich_text': [{'text': {'content': json['city']}}],},
-                        'VAT': {'rich_text': [{'text': {'content': json['VAT']}}],},
+                        'Name': {'rich_text': [{'text': {'content': str(json['name'])}}],},
+                        'Address': {'rich_text': [{'text': {'content': str(json['address'])}}],},
+                        'City': {'rich_text': [{'text': {'content': str(json['city'])}}],},
+                        'VAT': {'rich_text': [{'text': {'content': str(json['VAT'])}}],},
 
                     }
                 }
@@ -52,9 +52,9 @@ class NotionDB_Handler:
                         },
                         'properties': {
                             'Trans-ID': {'title': [{'text': {'content': str(row['ID'])}}]},
-                            'Cost': {'number': row['amount']},
+                            'Cost': {'number': row['amount'] if row['amount'] != None else 0},
                             'Tax': {'number': row['tax']},
-                            'Description': {'rich_text': [{'text': {'content': row['description']}}],}
+                            'Description': {'rich_text': [{'text': {'content': str(row['description'])}}],}
 
                         }
                     }

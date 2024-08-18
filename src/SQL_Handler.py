@@ -38,6 +38,16 @@ class SQL_Handler:
         self.cursor.execute(query)
         data = self.cursor.fetchone()
         return data["count"]
+    
+
+    def get_all_ids(self):
+        query = """
+            SELECT transaction.ID
+            FROM transaction"""
+        
+        self.cursor.execute(query)
+        data = self.cursor.fetchall()
+        return data
 
 
     def read_insertion_by_id(self, id):
@@ -51,6 +61,8 @@ class SQL_Handler:
         
         self.cursor.execute(query)
         data = self.cursor.fetchall()
+
+        #print(data)
         
         return data    
     
@@ -85,6 +97,8 @@ class SQL_Handler:
         #print(self.trasaction_json)
         #print(self.store_json)
         #print(self.good_json)
+
+    
 
 
     def close_connection(self):

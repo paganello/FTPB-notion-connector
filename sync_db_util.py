@@ -11,9 +11,12 @@ def sync_all():
     trasaction_number = SQL_client.count_trasactions()
     #print("Last SQL Transaction ID: ", last_SQL_transaction_id)
 
-    for i in range(1, trasaction_number+1):
-        if Notion_client.check_trasaction_id(i) == False:
-            insertion = SQL_client.read_insertion_by_id(i)
+    ids = SQL_client.get_all_ids()
+    #print(ids)
+    for i in ids:
+        if Notion_client.check_trasaction_id(i["ID"]) == False:
+            #print("Transaction ID: ", i["ID"])
+            insertion = SQL_client.read_insertion_by_id(i["ID"])
             SQL_client.extract_insertion_data(insertion)
 
             Notion_client.auto_detect_db_row_writer(SQL_client.trasaction_json)
